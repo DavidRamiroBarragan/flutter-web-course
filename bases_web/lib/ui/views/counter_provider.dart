@@ -1,11 +1,10 @@
 import 'package:bases_web/providers/counter_provider.dart';
-import 'package:bases_web/ui/shared/custom_app_menu.dart';
 import 'package:bases_web/ui/shared/custom_flat_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class CounterProviderPage extends StatelessWidget {
-  const CounterProviderPage({Key? key}) : super(key: key);
+class CounterProviderView extends StatelessWidget {
+  const CounterProviderView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +22,9 @@ class _CounterProviderPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final counterProvider = Provider.of<CounterProvider>(context);
-    return Scaffold(
-        body: Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const CustomMenuApp(),
         const Text('Contador provider'),
         FittedBox(
           fit: BoxFit.contain,
@@ -53,6 +50,6 @@ class _CounterProviderPageBody extends StatelessWidget {
           ],
         )
       ],
-    ));
+    );
   }
 }
