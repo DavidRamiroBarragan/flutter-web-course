@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vertical_landing_page/ui/shared/custom_app_menu.dart';
 import 'package:vertical_landing_page/ui/views/about.dart';
 import 'package:vertical_landing_page/ui/views/contact.dart';
 import 'package:vertical_landing_page/ui/views/home.dart';
@@ -14,16 +15,9 @@ class HomePage extends StatelessWidget {
       body: Container(
         decoration: buildBoxDecoration(),
         child: Stack(
-          children: [
-            const _HomeBody(),
-            Positioned(
-                right: 20,
-                top: 20,
-                child: Container(
-                  width: 150,
-                  height: 50,
-                  color: Colors.black,
-                ))
+          children: const [
+            _HomeBody(),
+            Positioned(right: 20, top: 20, child: CustomAppMenu())
           ],
         ),
       ),
