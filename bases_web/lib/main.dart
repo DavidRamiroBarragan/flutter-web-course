@@ -1,11 +1,12 @@
 import 'package:bases_web/locator.dart';
-import 'package:bases_web/router/route_generator.dart';
+import 'package:bases_web/router/router.dart';
 import 'package:bases_web/services/navigation_service.dart';
 import 'package:bases_web/ui/layout/main_layout.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   setupLocator();
+  Flurorouter.configureRoutes();
   runApp(const MyApp());
 }
 
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Rutas App',
       initialRoute: '/',
-      onGenerateRoute: RouteGenerator.generateRoute,
-      builder: (context, child) => MaiinLayout(child: child ?? Container),
+      onGenerateRoute: Flurorouter.router.generator,
+      builder: (context, child) => MainLayout(child: child ?? Container()),
       navigatorKey: locator<NavigationService>().navigationKey,
     );
   }

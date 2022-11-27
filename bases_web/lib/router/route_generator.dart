@@ -9,7 +9,7 @@ class RouteGenerator {
     switch (routeSettings.name) {
       case '/':
         return _fadeRoute(
-          const CounterView(),
+          const CounterView(base: '10'),
           '/',
         );
       case '/provider':

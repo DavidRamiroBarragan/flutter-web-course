@@ -4,7 +4,7 @@ class CounterProvider extends ChangeNotifier {
   int _counter = 15;
 
   get counter {
-    return this._counter;
+    return _counter;
   }
 
   void increment() {
