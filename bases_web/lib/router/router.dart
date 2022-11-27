@@ -1,6 +1,4 @@
-import 'package:bases_web/ui/views/counter.dart';
-import 'package:bases_web/ui/views/counter_provider.dart';
-import 'package:bases_web/ui/views/view_404.dart';
+import 'package:bases_web/router/route_handler.dart';
 import 'package:fluro/fluro.dart';
 
 class Flurorouter {
@@ -9,33 +7,24 @@ class Flurorouter {
   static void configureRoutes() {
     router.define(
       "/",
-      handler: _counterHandler,
+      handler: counterHandler,
       transitionType: TransitionType.fadeIn,
     );
     router.define(
       "/stateful",
-      handler: _counterHandler,
+      handler: counterHandler,
       transitionType: TransitionType.fadeIn,
     );
     router.define(
       "/stateful/:base",
-      handler: _counterHandler,
+      handler: counterHandler,
       transitionType: TransitionType.fadeIn,
     );
     router.define(
       "/provider",
-      handler: _counterHandlerProvider,
+      handler: counterHandlerProvider,
       transitionType: TransitionType.fadeIn,
     );
-    router.notFoundHandler = _notFoundHandler;
+    router.notFoundHandler = notFoundHandler;
   }
-
-  static final Handler _counterHandler =
-      Handler(handlerFunc: (context, params) {
-    return CounterView(base: params['base']?[0] ?? '5');
-  });
-  static final Handler _counterHandlerProvider =
-      Handler(handlerFunc: (context, params) => const CounterProviderView());
-  static final Handler _notFoundHandler =
-      Handler(handlerFunc: (context, params) => const View404());
 }
