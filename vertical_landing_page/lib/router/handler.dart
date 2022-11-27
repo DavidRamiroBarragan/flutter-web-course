@@ -5,6 +5,8 @@ final homeHandler = Handler(handlerFunc: ((context, parameters) {
   final route = parameters['page']!.first;
 
   if (route != '/') {
+
+
     return const HomePage();
   }
 }));
