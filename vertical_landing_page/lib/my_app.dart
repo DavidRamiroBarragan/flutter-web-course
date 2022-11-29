@@ -19,7 +19,6 @@ class _MyAppState extends State<MyApp> {
       title: 'Landing Page',
       onGenerateRoute: Flurorouter.router.generator,
       initialRoute: "/home",
-      home: Container(),
     );
   }
 }
