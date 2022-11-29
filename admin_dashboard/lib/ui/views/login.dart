@@ -1,3 +1,5 @@
+import 'package:admin_dashboard/ui/buttons/custom_outlinebutton.dart';
+import 'package:admin_dashboard/ui/buttons/link_text.dart';
 import 'package:flutter/material.dart';
 
 class LoginView extends StatelessWidget {
@@ -6,9 +8,75 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: const Center(
-        child: Text("Login view"),
-      )
-    );
+        margin: const EdgeInsets.only(top: 100),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 370),
+            child: Form(
+              child: Column(
+                children: [
+                  TextFormField(
+                    // validator: ,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: buildInputDecoration(
+                        hint: 'Ingrese su correo',
+                        label: 'Email',
+                        icon: Icons.email_outlined),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    // validator: ,
+                    obscureText: true,
+                    style: const TextStyle(
+                      color: Colors.white,
+                    ),
+                    decoration: buildInputDecoration(
+                        hint: 'Ingrese su password',
+                        label: 'Password',
+                        icon: Icons.password_outlined),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomOutlineButton(
+                    onPressed: () {},
+                    text: "Ingresar",
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  LinkText(
+                      text: "Nueva cuenta",
+                      onPress: () => print("Nueva cuenta"))
+                ],
+              ),
+            ),
+          ),
+        ));
   }
+
+  InputDecoration buildInputDecoration(
+          {required String hint,
+          required String label,
+          required IconData icon}) =>
+      InputDecoration(
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.white.withOpacity(0.3)),
+          ),
+          hintText: hint,
+          labelText: label,
+          prefixIcon: Icon(
+            icon,
+            color: Colors.grey,
+          ),
+          hintStyle: const TextStyle(color: Colors.white),
+          labelStyle: const TextStyle(color: Colors.white));
 }
