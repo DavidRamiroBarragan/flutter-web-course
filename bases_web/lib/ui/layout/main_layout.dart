@@ -1,9 +1,9 @@
 import 'package:bases_web/ui/shared/custom_app_menu.dart';
 import 'package:flutter/material.dart';
 
-class MaiinLayout extends StatelessWidget {
-  final child;
-  const MaiinLayout({Key? key, required this.child}) : super(key: key);
+class MainLayout extends StatelessWidget {
+  final Widget child;
+  const MainLayout({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class CounterProvider extends ChangeNotifier {
   int _counter = 15;
 
+  CounterProvider(String base) {
+    if (int.tryParse(base) != null) {
+      _counter = int.parse(base);
+    }
+  }
+
   get counter {
-    return this._counter;
+    return _counter;
   }
 
   void increment() {
