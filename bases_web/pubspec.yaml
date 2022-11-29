@@ -1,6 +1,6 @@
 ---
 name: bases_web
-description: A new Flutter project.
+description: Bases Flutter web.
 publish_to: none
 version: 1.0.0+1
 environment:
@@ -11,6 +11,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   provider: ^6.0.4
   get_it: ^7.2.0
+  fluro: ^2.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

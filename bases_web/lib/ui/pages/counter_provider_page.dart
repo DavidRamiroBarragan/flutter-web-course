@@ -5,13 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CounterProviderPage extends StatelessWidget {
-  const CounterProviderPage({Key? key}) : super(key: key);
+  String base = '5';
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         child: const _CounterProviderPageBody(),
-        create: (_) => CounterProvider());
+        create: (_) => CounterProvider(base));
   }
 }
 

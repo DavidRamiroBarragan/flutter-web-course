@@ -39,11 +39,29 @@ class _TabletDesktopMenu extends StatelessWidget {
                   locator<NavigationService>().navigateTo('/provider'),
               label: 'Contador con Provider',
               color: Colors.black),
+          const SizedBox(
+            width: 10,
+          ),
           CustomFlatButton(
               onPress: () => locator<NavigationService>().navigateTo('/ddddd'),
               label: 'Otra Página',
+              color: Colors.black),
+          const SizedBox(
+            width: 10,
+          ),
+          CustomFlatButton(
+              onPress: () => locator<NavigationService>().navigateTo('/stateful/100'),
+              label: 'Contador Stateful 100',
+              color: Colors.black),
+          const SizedBox(
+            width: 10,
+          ),
+          CustomFlatButton(
+              onPress: () => locator<NavigationService>().navigateTo('/provider?q=200'),
+              label: 'Contador Provider 200',
               color: Colors.black)
         ],
+
       ),
     );
   }
