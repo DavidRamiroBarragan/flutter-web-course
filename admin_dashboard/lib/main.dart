@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'Admin Dashboard',
       initialRoute: Flurorouter.loginRouter,
       onGenerateRoute: Flurorouter.router.generator,
-      builder: (context, child) => const AuthLayout(),
+      builder: (context, child) => AuthLayout(child: child!),
     );
   }
 }
