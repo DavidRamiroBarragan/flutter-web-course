@@ -18,6 +18,10 @@ class MyApp extends StatelessWidget {
       initialRoute: Flurorouter.loginRouter,
       onGenerateRoute: Flurorouter.router.generator,
       builder: (context, child) => AuthLayout(child: child!),
+      theme: ThemeData.light().copyWith(
+          scrollbarTheme: const ScrollbarThemeData().copyWith(
+              thumbColor:
+                  MaterialStateProperty.all(Colors.grey.withOpacity(0.5)))),
     );
   }
 }
