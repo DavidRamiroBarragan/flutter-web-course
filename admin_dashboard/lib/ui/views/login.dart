@@ -16,7 +16,7 @@ class LoginView extends StatelessWidget {
     final authProvider = Provider.of<AuthProvider>(context);
     return ChangeNotifierProvider(
       create: (context) {
-        return LoginFormProvider(authProvider);
+        return LoginFormProvider();
       },
       child: Builder(
         builder: (context) {
@@ -35,7 +35,7 @@ class LoginView extends StatelessWidget {
                       children: [
                         TextFormField(
                           validator: (value) {
-                            if (EmailValidator.validate(value!)) {
+                            if (!EmailValidator.validate(value!)) {
                               return 'Email no válido';
                             }
 
@@ -83,7 +83,11 @@ class LoginView extends StatelessWidget {
                         ),
                         CustomOutlineButton(
                           onPressed: () {
-                            loginProvider.validateForm();
+                            final isValid = loginProvider.validateForm();
+
+                            if (isValid) {}
+                            authProvider.login(
+                                loginProvider.email, loginProvider.password);
                           },
                           text: "Ingresar",
                         ),

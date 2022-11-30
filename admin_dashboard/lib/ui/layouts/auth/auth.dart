@@ -18,7 +18,7 @@ class AuthLayout extends StatelessWidget {
           physics: const ClampingScrollPhysics(),
           children: [
             (size.width > 1000)
-                ? _DesktopBody(child: child)
+                ? Expanded(child: _DesktopBody(child: child))
                 : _MobileBody(child: child),
             const LinksBar()
           ],
@@ -40,7 +40,9 @@ class _MobileBody extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(height: 20,),
+          const SizedBox(
+            height: 20,
+          ),
           const CustomTitle(),
           SizedBox(
             width: double.infinity,
