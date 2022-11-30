@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class LoginFormProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
-  late AuthProvider authProvider;
+  final AuthProvider authProvider;
 
   String email = '';
   String password = '';
@@ -15,6 +15,7 @@ class LoginFormProvider extends ChangeNotifier {
     var isValid = formKey.currentState!.validate();
 
     if (isValid) {
+      authProvider.login(email, password);
       print('El formulario es válido');
     }
   }
