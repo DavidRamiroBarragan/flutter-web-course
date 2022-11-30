@@ -1,10 +1,24 @@
+import 'package:admin_dashboard/providers/auth.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/ui/layouts/auth/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   Flurorouter.configureRouter();
-  runApp(const MyApp());
+  runApp(const AppState());
+}
+
+class AppState extends StatelessWidget {
+  const AppState({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => AuthProvider())],
+      child: const MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
