@@ -18,7 +18,7 @@ class RegisterView extends StatelessWidget {
         builder: (context) {
           final registerProvider = Provider.of<RegisterFormProvider>(context, listen: false);
           return Container(
-              margin: const EdgeInsets.only(top: 100),
+              margin: const EdgeInsets.only(top: 50),
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Center(
                 child: ConstrainedBox(
