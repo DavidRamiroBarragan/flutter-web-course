@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         if (authProvider.status == AuthStatus.checking) {
           return const SplashLayout();
         }
-        if (authProvider.status == AuthStatus.autenticated) {
+        if (authProvider.status == AuthStatus.authenticated) {
           return DashboardLayout(child: child!);
         }
         return AuthLayout(child: child!);

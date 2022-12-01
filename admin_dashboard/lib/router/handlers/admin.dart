@@ -9,7 +9,7 @@ class AdminHandlers {
   static Handler login = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.status == AuthStatus.notAutenticated) {
+    if (authProvider.status == AuthStatus.notAuthenticated) {
       return const LoginView();
     }
 
@@ -18,7 +18,7 @@ class AdminHandlers {
   static Handler register = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.status == AuthStatus.notAutenticated) {
+    if (authProvider.status == AuthStatus.notAuthenticated) {
       return const RegisterView();
     }
     return const DashboardView();
