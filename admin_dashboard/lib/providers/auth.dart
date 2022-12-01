@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 enum AuthStatus {
   checking,
-  autenticated,
-  notAutenticated
+  authenticated,
+  notAuthenticated
 }
 
 class AuthProvider extends ChangeNotifier {
@@ -23,7 +23,7 @@ class AuthProvider extends ChangeNotifier {
     LocalStorage.preferences.setString('token', _token!);
 
     //TODO: Navegar al Dashboard
-    status = AuthStatus.autenticated;
+    status = AuthStatus.authenticated;
     notifyListeners();
 
     NavigationService.replaceTo(Flurorouter.dashBoardRouter);
@@ -31,7 +31,7 @@ class AuthProvider extends ChangeNotifier {
 
   Future<bool> isAuthenticated() async {
     if (LocalStorage.preferences.getString('token') == null) {
-      status = AuthStatus.notAutenticated;
+      status = AuthStatus.notAuthenticated;
       notifyListeners();
       return false;
     }
@@ -39,7 +39,7 @@ class AuthProvider extends ChangeNotifier {
     //TODO: comprobar si el JSON token es válido
 
     Future.delayed(Duration(microseconds: 1000));
-    status = AuthStatus.autenticated;
+    status = AuthStatus.authenticated;
     notifyListeners();
     return true;
   }

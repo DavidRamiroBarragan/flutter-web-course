@@ -8,7 +8,7 @@ class DashboardHandlers {
   static Handler dashboard = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
 
-    if (authProvider.status == AuthStatus.notAutenticated) {
+    if (authProvider.status == AuthStatus.notAuthenticated) {
       return const LoginView();
     }
 
