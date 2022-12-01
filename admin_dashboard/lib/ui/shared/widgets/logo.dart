@@ -24,7 +24,10 @@ class Logo extends StatelessWidget {
                 fontSize: 20,
                 fontWeight: FontWeight.w200,
                 color: Colors.white70),
-          )
+          ),
+          const SizedBox(
+            height: 50,
+          ),
         ],
       ),
     );
