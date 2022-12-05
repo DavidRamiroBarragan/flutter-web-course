@@ -101,8 +101,10 @@ class Sidebar extends StatelessWidget {
           MenuItemCustom(
             text: "Blank Page",
             icon: Icons.post_add_outlined,
-            onPress: () {},
-            isActive: false,
+            onPress: () {
+              navigateTo(Flurorouter.blankRouter);
+            },
+            isActive: menuProvider.currentPage == Flurorouter.blankRouter,
           ),
           const SizedBox(
             width: 30,
