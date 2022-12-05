@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/providers/auth.dart';
+import 'package:admin_dashboard/providers/menu.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation.dart';
@@ -21,7 +22,8 @@ class AppState extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider())
+        ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => MenuProvider())
       ],
       child: const MyApp(),
     );
