@@ -1,13 +1,23 @@
+import 'package:admin_dashboard/providers/menu.dart';
+import 'package:admin_dashboard/router/router.dart';
+import 'package:admin_dashboard/services/navigation.dart';
 import 'package:admin_dashboard/ui/shared/widgets/logo.dart';
 import 'package:admin_dashboard/ui/shared/widgets/menu_item.dart';
 import 'package:admin_dashboard/ui/shared/widgets/text_separator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Sidebar extends StatelessWidget {
   const Sidebar({Key? key}) : super(key: key);
 
+  void navigateTo(String route) {
+    MenuProvider.close();
+    NavigationService.navigateTo(route);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final menuProvider = Provider.of<MenuProvider>(context);
     return Container(
       decoration: buildBoxDecoration(),
       width: 200,
@@ -23,8 +33,10 @@ class Sidebar extends StatelessWidget {
           MenuItemCustom(
             text: "Dashboard",
             icon: Icons.compass_calibration_outlined,
-            onPress: () {},
-            isActive: false,
+            onPress: () {
+              navigateTo(Flurorouter.dashBoardRouter);
+            },
+            isActive: menuProvider.currentPage == Flurorouter.dashBoardRouter,
           ),
           MenuItemCustom(
             text: "Orders",
@@ -69,8 +81,10 @@ class Sidebar extends StatelessWidget {
           MenuItemCustom(
             text: "Icons",
             icon: Icons.list_alt_outlined,
-            onPress: () {},
-            isActive: false,
+            onPress: () {
+              navigateTo(Flurorouter.iconsRouter);
+            },
+            isActive: menuProvider.currentPage == Flurorouter.iconsRouter,
           ),
           MenuItemCustom(
             text: "Marketing",
@@ -90,6 +104,10 @@ class Sidebar extends StatelessWidget {
             onPress: () {},
             isActive: false,
           ),
+          const SizedBox(
+            width: 30,
+          ),
+          const TextSeparator(text: 'Exit'),
           MenuItemCustom(
             text: "Log out",
             icon: Icons.exit_to_app_outlined,

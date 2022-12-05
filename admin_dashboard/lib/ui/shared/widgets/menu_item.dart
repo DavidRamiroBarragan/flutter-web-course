@@ -25,7 +25,8 @@ class _MenuItemCustomState extends State<MenuItemCustom> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: const Duration(microseconds: 250),
+
+      duration: const Duration(microseconds: 300),
       color: isHover
           ? Colors.white.withOpacity(0.1)
           : widget.isActive
