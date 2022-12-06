@@ -25,6 +25,7 @@ class RegisterView extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 370),
                 child: Form(
+                  key: registerProvider.formKey,
                   child: Column(
                     children: [
                       TextFormField(
@@ -35,6 +36,7 @@ class RegisterView extends StatelessWidget {
                           return null;
                         },
                         onChanged: (value) {
+                          print(value);
                           registerProvider.name = value;
                         },
                         style: const TextStyle(
@@ -56,6 +58,7 @@ class RegisterView extends StatelessWidget {
                           return null;
                         },
                         onChanged: (value) {
+                          print(value);
                           registerProvider.email = value;
                         },
                         style: const TextStyle(
@@ -99,13 +102,13 @@ class RegisterView extends StatelessWidget {
                         onPressed: () {
                           final validForm = registerProvider.validateForm();
 
-                          if (validForm) {
-                            final auth = Provider.of<AuthProvider>(context);
-                            auth.register(
-                                registerProvider.email,
-                                registerProvider.password,
-                                registerProvider.name);
+                          if (!validForm) {
+                            return;
                           }
+
+                          final auth = Provider.of<AuthProvider>(context);
+                          auth.register(registerProvider.email,
+                              registerProvider.password, registerProvider.name);
                         },
                         text: "Crear cuenta",
                       ),

@@ -1,4 +1,5 @@
 import 'package:admin_dashboard/api/cafe_api.dart';
+import 'package:admin_dashboard/models/http/auth_response.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation.dart';
@@ -9,6 +10,7 @@ enum AuthStatus { checking, authenticated, notAuthenticated }
 class AuthProvider extends ChangeNotifier {
   String? _token;
   AuthStatus status = AuthStatus.checking;
+  Usuario? user;
 
   AuthProvider() {
     isAuthenticated();
@@ -29,16 +31,16 @@ class AuthProvider extends ChangeNotifier {
   register(String email, String password, String name) {
     final data = {'nombre': name, 'correo': email, 'password': password};
 
-    CafeApi.httpPost('/usuarios', data)
-        .then((value) => print(value))
-        .catchError((e) {});
-    // LocalStorage.preferences.setString('token', _token!);
-
-    //TODO: Navegar al Dashboard
-    // status = AuthStatus.authenticated;
-    // notifyListeners();
-    //
-    // NavigationService.replaceTo(Flurorouter.dashBoardRouter);
+    CafeApi.httpPost('/usuarios', data).then((value) {
+      final response = AuthResponse.fromMap(value);
+      user = response.usuario;
+      status = AuthStatus.authenticated;
+      LocalStorage.preferences.setString('token', response.token);
+      NavigationService.replaceTo(Flurorouter.dashBoardRouter);
+      notifyListeners();
+    }).catchError((e) {
+      print(e);
+    });
   }
 
   Future<bool> isAuthenticated() async {
