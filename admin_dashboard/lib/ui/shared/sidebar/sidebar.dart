@@ -1,3 +1,4 @@
+import 'package:admin_dashboard/providers/auth.dart';
 import 'package:admin_dashboard/providers/menu.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/navigation.dart';
@@ -113,7 +114,9 @@ class Sidebar extends StatelessWidget {
           MenuItemCustom(
             text: "Log out",
             icon: Icons.exit_to_app_outlined,
-            onPress: () {},
+            onPress: () {
+              Provider.of<AuthProvider>(context, listen: false).logout();
+            },
             isActive: false,
           ),
         ],

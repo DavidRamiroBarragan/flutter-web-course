@@ -3,6 +3,7 @@ import 'package:admin_dashboard/models/http/auth_response.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation.dart';
+import 'package:admin_dashboard/services/notifications.dart';
 import 'package:flutter/material.dart';
 
 enum AuthStatus { checking, authenticated, notAuthenticated }
@@ -17,18 +18,22 @@ class AuthProvider extends ChangeNotifier {
   }
 
   void login(String email, String password) {
-    //TODO: Hacer petición Http.
-    _token = 'k4534jk5bkfdsuh5345n3k45hkhfldskfs53453';
-    LocalStorage.preferences.setString('token', _token!);
+    final data = {'correo': email, 'password': password};
 
-    //TODO: Navegar al Dashboard
-    status = AuthStatus.authenticated;
-    notifyListeners();
-
-    NavigationService.replaceTo(Flurorouter.dashBoardRouter);
+    CafeApi.httpPost('/auth/login', data).then((value) {
+      final response = AuthResponse.fromMap(value);
+      user = response.usuario;
+      status = AuthStatus.authenticated;
+      LocalStorage.preferences.setString('token', response.token);
+      NavigationService.replaceTo(Flurorouter.dashBoardRouter);
+      CafeApi.configureDio();
+      notifyListeners();
+    }).catchError((e) {
+      NotificationsService.showSnackBarError('Credenciales mo validas');
+    });
   }
 
-  register(String email, String password, String name) {
+  void register(String email, String password, String name) {
     final data = {'nombre': name, 'correo': email, 'password': password};
 
     CafeApi.httpPost('/usuarios', data).then((value) {
@@ -37,9 +42,10 @@ class AuthProvider extends ChangeNotifier {
       status = AuthStatus.authenticated;
       LocalStorage.preferences.setString('token', response.token);
       NavigationService.replaceTo(Flurorouter.dashBoardRouter);
+      CafeApi.configureDio();
       notifyListeners();
     }).catchError((e) {
-      print(e);
+      NotificationsService.showSnackBarError('Credenciales mo validas');
     });
   }
 
@@ -50,11 +56,28 @@ class AuthProvider extends ChangeNotifier {
       return false;
     }
 
-    //TODO: comprobar si el JSON token es válido
+    try {
+      final response = await CafeApi.httpGet('/auth');
+      final authResponse = AuthResponse.fromMap(response);
 
-    Future.delayed(Duration(microseconds: 1000));
-    status = AuthStatus.authenticated;
+      user = authResponse.usuario;
+      _token = authResponse.token;
+      status = AuthStatus.authenticated;
+
+      CafeApi.configureDio();
+      notifyListeners();
+
+      return true;
+    } catch (e) {
+      status = AuthStatus.notAuthenticated;
+      notifyListeners();
+      return false;
+    }
+  }
+
+  void logout() {
+    LocalStorage.preferences.remove('token');
+    status = AuthStatus.notAuthenticated;
     notifyListeners();
-    return true;
   }
 }

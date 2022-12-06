@@ -59,6 +59,9 @@ class LoginView extends StatelessWidget {
                           onChanged: (value) {
                             loginProvider.password = value;
                           },
+                          onFieldSubmitted: (value) {
+                            submit(loginProvider, authProvider);
+                          },
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Ingrese su contraseña';
@@ -83,11 +86,7 @@ class LoginView extends StatelessWidget {
                         ),
                         CustomOutlineButton(
                           onPressed: () {
-                            final isValid = loginProvider.validateForm();
-
-                            if (isValid) {}
-                            authProvider.login(
-                                loginProvider.email, loginProvider.password);
+                            submit(loginProvider, authProvider);
                           },
                           text: "Ingresar",
                         ),
@@ -106,5 +105,13 @@ class LoginView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  void submit(LoginFormProvider loginProvider, AuthProvider authProvider){
+    final isValid = loginProvider.validateForm();
+
+    if (isValid) {}
+    authProvider.login(
+        loginProvider.email, loginProvider.password);
   }
 }

@@ -4,6 +4,7 @@ import 'package:admin_dashboard/providers/menu.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation.dart';
+import 'package:admin_dashboard/services/notifications.dart';
 import 'package:admin_dashboard/ui/layouts/auth/auth.dart';
 import 'package:admin_dashboard/ui/layouts/dashboard/dashboard.dart';
 import 'package:admin_dashboard/ui/layouts/splash/layout.dart';
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
       initialRoute: Flurorouter.loginRouter,
       navigatorKey: NavigationService.navigatorStateKey,
       onGenerateRoute: Flurorouter.router.generator,
+      scaffoldMessengerKey: NotificationsService.notificationKey,
       builder: (context, child) {
         final authProvider = Provider.of<AuthProvider>(context);
 
