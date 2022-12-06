@@ -7,5 +7,12 @@ class RegisterFormProvider extends ChangeNotifier {
   String password = '';
   String name = '';
 
-  validateForm() {}
+  validateForm() {
+
+    if(formKey.currentState!.validate()){
+      return true;
+    }
+
+    return false;
+  }
 }
