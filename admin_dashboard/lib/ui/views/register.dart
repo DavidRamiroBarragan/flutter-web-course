@@ -52,13 +52,12 @@ class RegisterView extends StatelessWidget {
                       ),
                       TextFormField(
                         validator: (value) {
-                          if (EmailValidator.validate(value!)) {
+                          if (!EmailValidator.validate(value!)) {
                             return 'Email no válido';
                           }
                           return null;
                         },
                         onChanged: (value) {
-                          print(value);
                           registerProvider.email = value;
                         },
                         style: const TextStyle(
@@ -106,7 +105,7 @@ class RegisterView extends StatelessWidget {
                             return;
                           }
 
-                          final auth = Provider.of<AuthProvider>(context);
+                          final auth = Provider.of<AuthProvider>(context, listen: false);
                           auth.register(registerProvider.email,
                               registerProvider.password, registerProvider.name);
                         },

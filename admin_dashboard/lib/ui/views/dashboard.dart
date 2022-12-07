@@ -9,6 +9,7 @@ class DashboardView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: ListView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         physics: const ClampingScrollPhysics(),
         children: [
           Text(

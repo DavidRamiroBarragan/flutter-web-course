@@ -29,7 +29,7 @@ class AuthProvider extends ChangeNotifier {
       CafeApi.configureDio();
       notifyListeners();
     }).catchError((e) {
-      NotificationsService.showSnackBarError('Credenciales mo validas');
+      NotificationsService.showSnackBarError('Credenciales no validas');
     });
   }
 
@@ -45,7 +45,7 @@ class AuthProvider extends ChangeNotifier {
       CafeApi.configureDio();
       notifyListeners();
     }).catchError((e) {
-      NotificationsService.showSnackBarError('Credenciales mo validas');
+      NotificationsService.showSnackBarError('Credenciales no validas');
     });
   }
 

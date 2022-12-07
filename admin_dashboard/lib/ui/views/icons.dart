@@ -8,6 +8,7 @@ class IconsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       physics: const ClampingScrollPhysics(),
       children: [
         Text(

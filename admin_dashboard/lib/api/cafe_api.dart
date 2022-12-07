@@ -29,7 +29,6 @@ class CafeApi {
       final response = await _dio.post(path, data: formData);
       return response.data;
     } catch (e) {
-      print(e);
       throw ('Error en el post');
     }
   }

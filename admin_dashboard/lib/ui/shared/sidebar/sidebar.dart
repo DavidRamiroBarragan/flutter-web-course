@@ -54,7 +54,9 @@ class Sidebar extends StatelessWidget {
           MenuItemCustom(
             text: "Categories",
             icon: Icons.layers_outlined,
-            onPress: () {},
+            onPress: () {
+              navigateTo(Flurorouter.categoriesRouter);
+            },
             isActive: false,
           ),
           MenuItemCustom(
