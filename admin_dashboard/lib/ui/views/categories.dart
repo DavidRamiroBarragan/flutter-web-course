@@ -2,6 +2,7 @@ import 'package:admin_dashboard/datatables/categories.dart';
 import 'package:admin_dashboard/providers/categories.dart';
 import 'package:admin_dashboard/ui/buttons/custom_icon_button.dart';
 import 'package:admin_dashboard/ui/labels/custom_labels.dart';
+import 'package:admin_dashboard/ui/modals/category_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,7 +56,11 @@ class _CategoriesViewState extends State<CategoriesView> {
           rowsPerPage: _rowsPerPage,
           actions: [
             CustomIconButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  backgroundColor: Colors.transparent,
+                    context: context, builder: (_) => const CategoryModal());
+              },
               text: "Crear",
               icon: Icons.add_outlined,
             )

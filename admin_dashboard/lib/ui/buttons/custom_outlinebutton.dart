@@ -27,7 +27,7 @@ class CustomOutlineButton extends StatelessWidget {
         onPressed: () => onPressed(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Text(text, style: const TextStyle(fontSize: 16)),
+          child: Text(text, style: TextStyle(fontSize: 16, color: color)),
         ));
   }
 }

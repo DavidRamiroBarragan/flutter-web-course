@@ -1,12 +1,14 @@
 import 'package:admin_dashboard/models/category.dart';
+import 'package:admin_dashboard/providers/categories.dart';
+import 'package:admin_dashboard/ui/modals/category_modal.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CategoriesDataTableSource extends DataTableSource {
   final List<Category> categories;
   final BuildContext context;
 
   CategoriesDataTableSource(this.categories, this.context);
-
 
   @override
   DataRow getRow(int index) {
@@ -16,17 +18,32 @@ class CategoriesDataTableSource extends DataTableSource {
       DataCell(Text(categories[index].usuario.nombre)),
       DataCell(Row(
         children: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.edit_outlined)),
+          IconButton(
+              onPressed: () {
+                showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (_) => CategoryModal(category: categories[index]));
+              },
+              icon: const Icon(Icons.edit_outlined)),
           IconButton(
               onPressed: () {
                 final dialog = AlertDialog(
                   title: const Text("Estás seguro"),
-                  content: Text('Borrar definitivamente ${categories[index].nombre}'),
+                  content: Text(
+                      'Borrar definitivamente ${categories[index].nombre}'),
                   actions: [
-                    TextButton(onPressed: (){
-                      Navigator.of(context).pop;
-                    }, child: const Text("No")),
-                    TextButton(onPressed: (){}, child: const Text("Sí, borrar")),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop;
+                        },
+                        child: const Text("No")),
+                    TextButton(
+                        onPressed: () async {
+                          await Provider.of<CategoriesProvider>(context, listen: false)
+                              .deleteCategory(categories[index].id);
+                        },
+                        child: const Text("Sí, borrar")),
                   ],
                 );
 
@@ -42,7 +59,7 @@ class CategoriesDataTableSource extends DataTableSource {
   }
 
   @override
-  bool get isRowCountApproximate => true;
+  bool get isRowCountApproximate => false;
 
   @override
   int get rowCount => categories.length;
