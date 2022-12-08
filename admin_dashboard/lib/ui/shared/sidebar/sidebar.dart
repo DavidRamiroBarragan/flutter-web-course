@@ -13,7 +13,7 @@ class Sidebar extends StatelessWidget {
 
   void navigateTo(String route) {
     MenuProvider.close();
-    NavigationService.navigateTo(route);
+    NavigationService.replaceTo(route);
   }
 
   @override
