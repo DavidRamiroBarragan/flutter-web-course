@@ -6,6 +6,7 @@ import 'package:admin_dashboard/ui/views/categories.dart';
 import 'package:admin_dashboard/ui/views/dashboard.dart';
 import 'package:admin_dashboard/ui/views/icons.dart';
 import 'package:admin_dashboard/ui/views/login.dart';
+import 'package:admin_dashboard/ui/views/users_view.dart';
 import 'package:fluro/fluro.dart';
 import 'package:provider/provider.dart';
 
@@ -51,5 +52,16 @@ class DashboardHandlers {
     Provider.of<MenuProvider>(context)
         .serCurrentPageUrl(Flurorouter.categoriesRouter);
     return const CategoriesView();
+  });
+
+  static Handler users = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+
+    if (authProvider.status == AuthStatus.notAuthenticated) {
+      return const LoginView();
+    }
+    Provider.of<MenuProvider>(context)
+        .serCurrentPageUrl(Flurorouter.blankRouter);
+    return UsersView();
   });
 }
