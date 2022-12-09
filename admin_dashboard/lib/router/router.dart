@@ -14,6 +14,7 @@ class Flurorouter {
   static String blankRouter = '/dashboard/blank';
   static String categoriesRouter = '/dashboard/categories';
   static String usersRouter = '/dashboard/users';
+  static String userRouter = '/dashboard/users/:uid';
 
   static void configureRouter() {
     router.define(rootRouter, handler: AdminHandlers.login);
@@ -33,6 +34,8 @@ class Flurorouter {
         transitionType: TransitionType.none);
     router.define(usersRouter,
         handler: DashboardHandlers.users, transitionType: TransitionType.none);
+    router.define(userRouter,
+        handler: DashboardHandlers.user, transitionType: TransitionType.none);
     router.notFoundHandler = NotPageFoundHandlers.notPageFound;
   }
 }

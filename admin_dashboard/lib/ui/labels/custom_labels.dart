@@ -9,4 +9,12 @@ class CustomLabels {
       fontWeight: FontWeight.w400
     );
   }
+
+  static TextStyle h2(){
+
+    return GoogleFonts.roboto(
+        fontSize: 20,
+        fontWeight: FontWeight.w400
+    );
+  }
 }

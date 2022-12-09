@@ -10,7 +10,7 @@ class MenuProvider extends ChangeNotifier {
     return _currentPage;
   }
 
-  void serCurrentPageUrl(String url) {
+  void setCurrentPageUrl(String url) {
     _currentPage = url;
 
     Future.delayed(const Duration(milliseconds: 100), () {

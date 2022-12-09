@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 class NotPageFoundHandlers {
   static Handler notPageFound = Handler(handlerFunc: (context, params){
-    Provider.of<MenuProvider>(context!, listen: false).serCurrentPageUrl('/404');
+    Provider.of<MenuProvider>(context!, listen: false).setCurrentPageUrl('/404');
     return const NotFoundPage();
   });
 }

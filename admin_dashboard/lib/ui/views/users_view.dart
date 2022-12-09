@@ -22,13 +22,26 @@ class UsersView extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        PaginatedDataTable(columns: const [
-          DataColumn(label: Text("Avatar")),
-          DataColumn(label: Text("Nombre")),
-          DataColumn(label: Text('E-mail')),
-          DataColumn(label: Text('ID')),
-          DataColumn(label: Text('Acciones'))
-        ], source: users)
+        PaginatedDataTable(
+            sortAscending: userProvider.ascending,
+            sortColumnIndex: userProvider.column,
+            columns: [
+          const DataColumn(label: Text("Avatar")),
+          DataColumn(label: const Text("Nombre"), onSort: (index, _) {
+            userProvider.column = index;
+            userProvider.sortUsersByColumn((user) => user.nombre);
+          }),
+          DataColumn(label: const Text('E-mail'), onSort: (index, _) {
+            userProvider.column = index;
+            userProvider.sortUsersByColumn((user) => user.correo);
+          }),
+          const DataColumn(label: Text('ID')),
+          const DataColumn(label: Text('Acciones'))
+        ],
+            onPageChanged: (page) {
+              print(page);
+            },
+            source: users)
       ],
     );
   }
