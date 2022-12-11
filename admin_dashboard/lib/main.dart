@@ -3,6 +3,7 @@ import 'package:admin_dashboard/providers/auth.dart';
 import 'package:admin_dashboard/providers/categories.dart';
 import 'package:admin_dashboard/providers/menu.dart';
 import 'package:admin_dashboard/providers/user.dart';
+import 'package:admin_dashboard/providers/user_form_provider.dart';
 import 'package:admin_dashboard/router/router.dart';
 import 'package:admin_dashboard/services/local_storage.dart';
 import 'package:admin_dashboard/services/navigation.dart';
@@ -30,7 +31,8 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(lazy: false, create: (_) => AuthProvider()),
         ChangeNotifierProvider(lazy: false, create: (_) => MenuProvider()),
         ChangeNotifierProvider(create: (_) => CategoriesProvider()),
-        ChangeNotifierProvider(create: (_) => UserProvider())
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => UserFormProvider())
       ],
       child: const MyApp(),
     );
