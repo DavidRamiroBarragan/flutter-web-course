@@ -16,8 +16,7 @@ class CafeApi {
     try {
       final response = await _dio.get(path);
       return response.data;
-    } catch (e) {
-      print(e);
+    } on DioError catch (e) {
       throw ('Error en el get');
     }
   }
@@ -28,7 +27,7 @@ class CafeApi {
     try {
       final response = await _dio.post(path, data: formData);
       return response.data;
-    } catch (e) {
+    } on DioError catch (e) {
       throw ('Error en el post');
     }
   }
@@ -39,7 +38,7 @@ class CafeApi {
     try {
       final response = await _dio.put(path, data: formData);
       return response.data;
-    } catch (e) {
+    } on DioError catch (e) {
       throw ('Error en el put');
     }
   }
@@ -48,7 +47,7 @@ class CafeApi {
     try {
       final response = await _dio.delete(path);
       return response.data;
-    } catch (e) {
+    } on DioError catch (e) {
       throw ('Error en el delete');
     }
   }

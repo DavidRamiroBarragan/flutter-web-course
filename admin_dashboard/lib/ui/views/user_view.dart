@@ -1,6 +1,7 @@
 import 'package:admin_dashboard/models/user.dart';
 import 'package:admin_dashboard/providers/user.dart';
 import 'package:admin_dashboard/providers/user_form_provider.dart';
+import 'package:admin_dashboard/services/navigation.dart';
 import 'package:admin_dashboard/services/notifications.dart';
 import 'package:admin_dashboard/ui/cards/white_card.dart';
 import 'package:admin_dashboard/ui/inputs/custom_inputs.dart';
@@ -28,14 +29,25 @@ class _UserViewState extends State<UserView> {
     final usersFormProvider =
         Provider.of<UserFormProvider>(context, listen: false);
 
-    usersProvider.getUserByIdi(widget.uid).then((userDB) {
+    usersProvider.getUserById(widget.uid).then((userDB) {
+      if (userDB == null) {
+        NavigationService.replaceTo('/dashboard/users');
+      }
       usersFormProvider.user = userDB;
+      usersFormProvider.formKey = GlobalKey<FormState>();
       setState(() {
         user = userDB;
       });
     }).catchError((e) {
       NotificationsService.showSnackBarError('Error en la petición');
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    user = null;
+    Provider.of<UserFormProvider>(context, listen: false).user = null;
   }
 
   @override
@@ -151,7 +163,7 @@ class _UserForm extends StatelessWidget {
                     if (value == null || value.isEmpty) {
                       return 'Ingrese un correo';
                     }
-                    if (!EmailValidator.validate(value!)) {
+                    if (!EmailValidator.validate(value)) {
                       return 'Email no válido';
                     }
 
